@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
     mode: 'development',
@@ -8,8 +9,8 @@ module.exports = {
         index: './src/index.js',
         courses: './src/pages/courses.js'
     },
-    output: {
-        filename: '[name].js',
+    output: {//Optimize: add hash version - optimize the cache browser
+        filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
         clean: true
     },
@@ -49,6 +50,13 @@ module.exports = {
                     context: "src" // Préciser qu'on ne veut pas avoir le dossier src dans dist
                 }
             ]
-        })
-    ]
+        }),
+        //new BundleAnalyzerPlugin({})
+    ],
+    //Optimize: webpack split chunk(build a bubdle for all dependencies communes, then cached by brwoser)
+    optimization: {
+        splitChunks: {
+            chunks: "all"
+        }
+    }
 }

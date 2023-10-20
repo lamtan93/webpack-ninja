@@ -8,6 +8,8 @@ import validate from 'validate.js';
 import "./index.css";
 import "./_vendor.scss";
 
+//import showModal from "./components/modal";
+
 const footerCol1Items = ["Home", "About", "Contact us", "FAQ", "Blog"];
 const footerCol2Items = ["Flutter", "Javascript", "Java", "Nodejs", "Python"];
 const footerCol3Items = ["Home", "Feature", "Pricing", "FAQ", "About"];
@@ -56,3 +58,12 @@ const footerCol3 = $("#footer-column-3")[0];
 buildFooterItems(footerCol1, footerCol1Items);
 buildFooterItems(footerCol2, footerCol2Items);
 buildFooterItems(footerCol3, footerCol3Items);
+
+//Optimize: Lazy loading - dynamic import
+$("#pricing-plan").on("click", function () {
+  import(/* webpackChunkName: "modal"*/ "./components/modal" ).then(module => {
+    const showModal = module.default;
+    showModal();
+    $("#myModal").css("display", "block");
+  })
+});
