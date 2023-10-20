@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const webpack = require("webpack");//Optimaze: Shimming
 
 module.exports = {
     mode: 'development',
@@ -31,6 +32,9 @@ module.exports = {
         ],
     },
     plugins: [
+        new webpack.ProvidePlugin({ // Shimming - exporter un objet global dans toute application
+            $: "jquery" // s'assurer que jquery existe dans dependencies dans package.json
+        }),
         new HtmlWebpackPlugin({
             template: './src/index.html',
             chunks: ['index'],

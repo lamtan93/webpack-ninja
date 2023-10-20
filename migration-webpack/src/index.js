@@ -1,4 +1,4 @@
-import $ from 'jquery';
+//import $ from 'jquery'; // Remplacer par Shimming dans package.json
 import bootstrap from 'bootstrap';
 import Typed from 'typed.js';
 import _ from 'lodash';

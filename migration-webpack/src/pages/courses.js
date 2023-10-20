@@ -1,5 +1,5 @@
 import courseData from "../data/courses.json";
-import $ from 'jquery';
+//import $ from 'jquery'; remplacer par Shimming dans webpack.config.js
 import bootstrap from 'bootstrap';
 import Typed from 'typed.js';
 import _ from 'lodash';
