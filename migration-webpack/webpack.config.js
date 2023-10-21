@@ -12,7 +12,6 @@ const PATHS = {
 }
 
 module.exports = {
-    mode: 'development',
     entry: {
         index: './src/index.js',
         courses: './src/pages/courses.js'

@@ -67,3 +67,9 @@ $("#pricing-plan").on("click", function () {
     $("#myModal").css("display", "block");
   })
 });
+
+//Optimize Tree shaking
+//this function not used so it will be removed when webpack build in mode production
+const dummyFunction = () => {
+  console.log('Im a dummy function')
+}
