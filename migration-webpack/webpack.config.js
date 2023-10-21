@@ -4,6 +4,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");//Optimaze: Shimming
+const {PurgeCSSPlugin} = require("purgecss-webpack-plugin"); //Optimize: remove dead CSS
+const glob = require("glob"); // To scan all folders, work with purgecss-webpack-plugin
+
+const PATHS = {
+    src: path.resolve(__dirname, "src")
+}
 
 module.exports = {
     mode: 'development',
@@ -34,6 +40,10 @@ module.exports = {
     plugins: [
         new webpack.ProvidePlugin({ // Shimming - exporter un objet global dans toute application
             $: "jquery" // s'assurer que jquery existe dans dependencies dans package.json
+        }),
+        new PurgeCSSPlugin({ //Optimize: remove dead or inutil CSS
+            paths: glob.sync(`${PATHS.src}/**/*`, {nodir: true}),
+            //safelist: ["dummy"] // Optiond: si on ne veut pas qu'il supprimer les class de CSS dans ce tableau
         }),
         new HtmlWebpackPlugin({
             template: './src/index.html',
